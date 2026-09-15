@@ -1,25 +1,20 @@
-# 3주차 과제: React Memo - API 연동
-<br>
-
-[2주차 README 백업](https://app.notion.com/p/README-3d325975dbba803c9d1efcf3358dd947?source=copy_link)
-
-필수 구현 사항과 Review Question은 이 링크에서 확인 부탁드립니다.
+# 2주차 과제: React Memo
 
 <br>
 
 # 서론
 
-안녕하세요 🙌🏻 24기 프론트엔드 운영진 **이승연**입니다.
+안녕하세요 🙌🏻 24기 프론트엔드 운영진 **구민교**입니다.
 
-다들 2주차 미션인 React Memo를 만드시느라 수고 많으셨습니다! 지난 미션에서는 Vanilla JS로 구현했던 Memo 서비스를 React로 전환하면서, 컴포넌트 기반 개발 방식과 React Hooks를 활용한 상태 관리를 경험해보셨을 것이라 생각합니다.
+다들 1주차 미션인 Vanilla Memo를 만드시느라 수고 많으셨습니다! 1주차 미션을 통해 Vanilla JS로 메모 서비스를 구현하면서 React를 사용하지 않을 때의 불편함을 어느 정도 느껴보셨을 것이라 생각합니다.
 
-이번 미션은 2주차에 구현한 Memo 서비스에 **로그인과 회원가입 페이지를 추가하고, API를 연동하는 것**입니다❗️
+그리하여 이번 미션은, 1주차 스터디 미션으로 주어진 Memo 서비스를 **React**로 리팩토링하는 것입니다❗️
 
-이번 주차에는 서버와 데이터를 주고받으며 로그인과 회원가입이 어떻게 이루어지는지 살펴보게 됩니다. 사용자가 입력한 정보를 서버에 어떤 형태로 전달하는지, 서버의 응답에 따라 화면과 상태를 어떻게 변경해야 하는지 고민해보시기 바랍니다.
+기존에 React를 어느 정도 사용해보신 분들께는 더 효율적인 컴포넌트 구조와 디자인 패턴을 고민해보는 주차가 될 것이고, 아직 React를 깊게 접해보지 못한 분들께는 기존 애플리케이션을 React로 포팅하는 과정을 통해 왜 React가 등장하게 되었는지, 그리고 컴포넌트 기반 개발 방식이 Vanilla JS와 어떤 차이가 있는지 체감해보는 주차가 될 것이라 생각합니다.
 
-또한 이번 과제에서는 **Zustand와 TypeScript 사용이 필수입니다.** Zustand를 활용하면서 여러 컴포넌트에서 공유해야 하는 상태와 개별 컴포넌트에서 관리할 상태를 구분해보세요. TypeScript로 컴포넌트의 props와 API 요청·응답 데이터의 타입을 정의하며, 타입을 활용하는 개발 방식에도 익숙해져 보시면 좋겠습니다.
+이번 미션에서는 단순히 화면을 그대로 옮기는 것에 그치지 않고, **어떤 기준으로 컴포넌트를 나누고 어떻게 재사용할 수 있을지** 충분히 고민해보시기 바랍니다. 같은 화면이라도 다양한 컴포넌트 구조가 나올 수 있는 만큼, 본인이 생각하기에 가장 효율적인 방식으로 구현해보시면 좋겠습니다.
 
-API 연동이 처음이라면 다소 낯설게 느껴질 수 있습니다. 제공된 API 명세를 꼼꼼히 읽고, 요청과 응답을 하나씩 확인하면서 진행해보세요. 여유가 있다면 메모 작성·수정·삭제 API 연동과 마이페이지 UI 구현에도 도전해보시기 바랍니다!
+또한 이번 과제에서는 React 프로젝트 생성 시 **Vite 사용이 필수입니다.** 과제를 진행하면서 Vite를 활용한 프로젝트 환경 세팅과 함께 React의 기본적인 프로젝트 구조에도 자연스럽게 익숙해져 보세요.
 
 과제를 진행하다가 막히는 부분이 있더라도, 우선은 스스로 공부하고 찾아보며 해결해보는 과정을 권장드립니다. 다만 미션과 관련해 운영진의 도움이 필요하다면, 언제든 프론트엔드 카카오톡방에 질문 남겨주세요!
 
@@ -29,72 +24,49 @@ API 연동이 처음이라면 다소 낯설게 느껴질 수 있습니다. 제�
 
 ## 🎯 목표
 
-- **API 명세**를 이해하고, 서버와 데이터를 주고받는 방법을 익힙니다.
-- 로그인과 회원가입을 구현하며 **인증의 기본적인 흐름**을 이해합니다.
-- API 요청의 로딩·성공·실패 **상태에 따른 UI 처리**를 고민합니다.
-- **Zustand**를 활용한 전역 상태 관리 방법을 익힙니다.
-- 컴포넌트의 **지역 상태와 전역 상태를 구분**하고 적절하게 관리합니다.
-- **TypeScript**를 활용하여 컴포넌트의 props와 API 요청·응답 데이터의 타입을 정의합니다.
+- React의 기초를 이해합니다.
+- React를 통한 어플리케이션 상태 관리 방법을 이해합니다.
+- React Hooks에 대한 기초를 이해합니다.
+- React의 컴포넌트 기반 개발 방식을 이해하고, UI를 적절한 단위로 분리하여 구현합니다.
+- Vite를 통한 React 프로젝트 개발환경 구축을 익힙니다.
+- Tailwind CSS를 활용한 유틸리티 클래스 기반 스타일링 방식을 익힙니다.
 
 ## 📅 기한
 
-- **2026년 9월 27일 일요일 14:00까지**
+- 2026년 9월 16일 수요일 14:00까지
 
 ## 💬 Review Questions
 
-- 로그인 또는 회원가입 API 요청의 **로딩·성공·실패 상태**에 따라 UI를 어떻게 처리했나요? 본인의 구현 사례를 바탕으로 설명해주세요. 아직 구현하지 않은 상태라면, 사용자 경험을 고려하여 어떻게 처리하면 좋을지 작성해주세요.
-- React의 `useState`와 Zustand는 상태 관리 방식에서 어떤 차이가 있나요? 이번 과제에서 전역으로 관리한 상태는 무엇이며, 그렇게 결정한 이유는 무엇인가요?
-- 이번 과제에서 **TypeScript를 활용하며 느낀 장점과 어려움**은 무엇인가요? 컴포넌트의 props나 API 요청·응답에 타입을 정의한 사례를 바탕으로 설명해주세요.
+- Virtual DOM은 무엇이고, 이를 사용함으로써 얻는 이점은 무엇인가요?
+- React에서 컴포넌트를 분리하는 기준은 무엇이며, 컴포넌트 분리를 통해 얻을 수 있는 이점은 무엇인가요?
+- React 컴포넌트의 생명주기에 대해서 설명해주세요.
 
 ## 💡 필수 요건
 
-- 2주차에 React로 구현했던 **Memo 서비스를 기반으로 진행**합니다.
-- 피그마에 제공된 UI를 기준으로 **로그인 페이지를 구현하고, 로그인 API를 연동**합니다.
-- 피그마에 제공된 UI를 기준으로 **회원가입 페이지를 구현하고, 회원가입 API를 연동**합니다.
-- **Zustand를 사용하여 전역 상태를 관리**합니다.
-- **TypeScript를 사용하여 프로젝트를 진행**합니다.
-
-  ### 🗂️ API 연동 관련 자료
-  [API 명세서](https://app.notion.com/p/API-3da25975dbba80e48b96c4aaf56f8cb5?source=copy_link) <br>
-  [Swagger 링크](https://3-37-186-61.nip.io/swagger-ui/index.html#/)
-
-<br>
+- 1주차에 Vanilla JS로 구현했던 Memo 서비스를 React로 전환합니다.
+- 피그마에 제공된 UI를 기준으로 필요한 컴포넌트를 모두 구현합니다.
+- Tailwind CSS를 사용합니다.
+- React Hooks만을 사용하여 상태를 관리합니다. (전역 상태관리 라이브러리 사용 XX)
+- Vite를 활용하여 React 프로젝트 환경 구축을 진행합니다.
 
 ## ✅ 선택 요건
 
-- 메모 **작성·수정·삭제 API를 연동**합니다.
-- 추가 페이지인 **마이페이지 UI를 구현**합니다.
+- 기존 Memo 서비스에 여러분들이 추가하고 싶은 기능과 디자인을 자유롭게 추가해보세요.
+- TypeScript를 활용하여 프로젝트를 진행해보세요.
+- 시간이 된다면 다음 주차에 이어서 구현할 메모 작성 완료 부분의 UI를 미리 구현해보세요! 미리 구현해두면 여러분의 추석 연휴를 지킬 수 있습니다 🍂
 
 <br>
 
 # 링크 및 참고자료
 
-## HTTP와 API 연동
-
-- [MDN — HTTP 요청 메서드](https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Methods)
-- [MDN — HTTP 상태 코드](https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Status)
-- [MDN — async function](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/async_function)
-- [모던 JavaScript 튜토리얼 — fetch](https://ko.javascript.info/fetch)
-- [MDN — Fetch API 사용하기](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch)
-
-## React의 폼과 상태 관리
-
-- [React — State를 사용해 Input 다루기](https://ko.react.dev/learn/reacting-to-input-with-state)
-- [React — 컴포넌트 간 State 공유하기](https://ko.react.dev/learn/sharing-state-between-components)
-
-## Zustand
-
-- [Zustand — 시작하기 (영문)](https://zustand.docs.pmnd.rs/learn/getting-started/introduction)
-- [Zustand — TypeScript 기초 가이드 (영문)](https://zustand.docs.pmnd.rs/learn/guides/beginner-typescript.html)
-
-## TypeScript
-
-- [TypeScript — JavaScript 개발자를 위한 TypeScript](https://www.typescriptlang.org/ko/docs/handbook/typescript-in-5-minutes.html)
-- [TypeScript — 기본 타입과 타입 정의](https://www.typescriptlang.org/ko/docs/handbook/2/everyday-types.html)
-- [React — TypeScript 사용하기](https://ko.react.dev/learn/typescript)
-- [ts 절대경로 설정하기](https://tesseractjh.tistory.com/232)
-- [리액트 프로젝트에서 타입스크립트 사용하기(시리즈)](https://velog.io/@velopert/series/react-with-typescript)
-
-## Network 탭에서 실제 요청과 응답을 확인하는 방법 (참고용)
-
-- [Chrome DevTools — 네트워크 활동 검사](https://developer.chrome.com/docs/devtools/network?hl=ko)
+- [React Docs 주요 개념](https://react.dev/learn)
+- [React Docs Hooks](https://react.dev/reference/react)
+- [React useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
+- [컴포넌트 네이밍을 위한 자바스크립트 네이밍 컨벤션](https://velog.io/@cada/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%ED%83%80%EC%9D%BC-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%84%A4%EC%9D%B4%EB%B0%8D-%EC%BB%A8%EB%B2%A4%EC%85%98-%ED%8E%B8)
+- [useState, useEffect Hooks](https://velog.io/@velopert/react-hooks#1-usestate)
+- [Tailwind CSS 공식 문서](https://tailwindcss.com/docs/installation/using-vite)
+- [VSCode Prettier 설정](https://velog.io/@gangk_99/VS-Code-Prettier-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)
+- [Create React App (CRA) 지원 종료 공식 문서](https://react.dev/blog/2025/02/14/sunsetting-create-react-app)
+- [Create React App 지원 종료 관련 OKKY 커뮤니티 게시글](https://okky.kr/articles/1527414)
+- [CRA 대신 Vite로 React 프로젝트 시작하기](https://www.daleseo.com/vite-react/)
+- [Vite 실무 적용기 - 설명 + 프로젝트 설정](https://blog.hectodata.co.kr/bonjour-vite/)
