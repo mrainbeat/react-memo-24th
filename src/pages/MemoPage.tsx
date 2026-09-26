@@ -6,11 +6,13 @@ import TopBar from "../components/header/TopBar";
 import MemoView from "../components/modal/MemoView";
 import Modal from "../components/modal/Modal";
 import { useMemos } from "../hooks/useMemos";
+import { useAuthStore } from "../stores/authStore";
 import type { MemoContent } from "../types/memo";
 import { filterMemos } from "../utils/memo";
 
 export default function MemoPage() {
   const { memos, addMemo, updateMemo, deleteMemo, togglePin } = useMemos();
+  const logout = useAuthStore((s) => s.logout);
   const [keyword, setKeyword] = useState("");
   const [activeTag, setActiveTag] = useState<Tag | null>(null);
   const [selectedMemoId, setSelectedMemoId] = useState<string | null>(null);
@@ -30,6 +32,10 @@ export default function MemoPage() {
     if (!window.confirm("이 메모를 삭제할까요?")) return;
     deleteMemo(selectedMemoId);
     closeModal();
+  };
+
+  const handleLogout = () => {
+    if (window.confirm("로그아웃할까요?")) logout();
   };
 
   if (editor) {
@@ -59,6 +65,7 @@ export default function MemoPage() {
         activeTag={activeTag}
         onTagChange={setActiveTag}
         onAddClick={() => setEditor({ memoId: null })}
+        onProfileClick={handleLogout}
       />
       <MemoBoard
         memos={filteredMemos}

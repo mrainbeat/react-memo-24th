@@ -11,6 +11,7 @@ interface TopBarProps {
   activeTag: Tag | null;
   onTagChange: (tag: Tag | null) => void;
   onAddClick: () => void;
+  onProfileClick: () => void;
 }
 
 export default function TopBar({
@@ -19,6 +20,7 @@ export default function TopBar({
   activeTag,
   onTagChange,
   onAddClick,
+  onProfileClick,
 }: TopBarProps) {
   return (
     <header className="mb-8 flex items-center gap-6">
@@ -27,7 +29,7 @@ export default function TopBar({
         <SearchInput value={keyword} onChange={onKeywordChange} />
       </div>
       <IconButton icon={iconAddMemoBtn} label="새 메모 작성" onClick={onAddClick} className="size-20" />
-      <IconButton icon={iconProfileBtn} label="프로필" className="size-20" />
+      <IconButton icon={iconProfileBtn} label="로그아웃" onClick={onProfileClick} className="size-20" />
     </header>
   );
 }
