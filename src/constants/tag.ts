@@ -2,9 +2,20 @@ import dotDaily from "../assets/icons/dot-daily.svg";
 import dotWork from "../assets/icons/dot-work.svg";
 import dotOthers from "../assets/icons/dot-others.svg";
 
-export const TAGS = ["daily", "work", "others"];
+export const TAGS = ["daily", "work", "others"] as const;
+export type Tag = (typeof TAGS)[number];
 
-export const TAG_STYLES = {
+interface TagStyle {
+  label: string;
+  dot: string;
+  bg: string;
+  text: string;
+  footer: string;
+  editorBg: string;
+  placeholder: string;
+}
+
+export const TAG_STYLES: Record<Tag, TagStyle> = {
   daily: {
     label: "Daily",
     dot: dotDaily,

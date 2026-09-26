@@ -2,8 +2,13 @@ import { useRef } from "react";
 import iconSearchBar from "../../assets/icons/search-bar-icon.svg";
 import IconButton from "../common/IconButton";
 
-export default function SearchInput({ value, onChange }) {
-  const inputRef = useRef(null);
+interface SearchInputProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export default function SearchInput({ value, onChange }: SearchInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -18,7 +23,7 @@ export default function SearchInput({ value, onChange }) {
       <IconButton
         icon={iconSearchBar}
         label="검색"
-        onClick={() => inputRef.current.focus()}
+        onClick={() => inputRef.current?.focus()}
         className="size-12"
       />
     </>

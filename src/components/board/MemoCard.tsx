@@ -1,8 +1,15 @@
 import iconStarFilled from "../../assets/icons/star-filled.svg";
 import iconStarOutline from "../../assets/icons/star-outline.svg";
 import { TAG_STYLES } from "../../constants/tag";
+import type { Memo } from "../../types/memo";
 
-export default function MemoCard({ memo, onOpen, onTogglePin }) {
+interface MemoCardProps {
+  memo: Memo;
+  onOpen: (id: string) => void;
+  onTogglePin: (id: string) => void;
+}
+
+export default function MemoCard({ memo, onOpen, onTogglePin }: MemoCardProps) {
   const { bg, label, footer } = TAG_STYLES[memo.tag];
 
   return (

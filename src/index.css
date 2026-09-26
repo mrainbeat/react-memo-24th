@@ -55,6 +55,14 @@
 }
 
 @layer base {
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+
   body {
     background-color: var(--color-blue-01);
     color: var(--color-blue-07);

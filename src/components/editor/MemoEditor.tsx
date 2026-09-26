@@ -1,20 +1,28 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import iconBack from "../../assets/icons/icon-back.svg";
-import { TAG_STYLES } from "../../constants/tag";
+import { TAG_STYLES, type Tag } from "../../constants/tag";
+import type { Memo, MemoContent } from "../../types/memo";
 import { formatDate } from "../../utils/memo";
 import IconButton from "../common/IconButton";
 import MemoMeta from "../modal/MemoMeta";
 
-export default function MemoEditor({ memo, defaultTag, onCancel, onSubmit }) {
+interface MemoEditorProps {
+  memo?: Memo;
+  defaultTag: Tag;
+  onCancel: () => void;
+  onSubmit: (content: MemoContent) => void;
+}
+
+export default function MemoEditor({ memo, defaultTag, onCancel, onSubmit }: MemoEditorProps) {
   const [title, setTitle] = useState(memo?.title ?? "");
   const [content, setContent] = useState(memo?.content ?? "");
-  const [tag, setTag] = useState(memo?.tag ?? defaultTag);
+  const [tag, setTag] = useState<Tag>(memo?.tag ?? defaultTag);
   const [date] = useState(() => memo?.date ?? formatDate(new Date()));
 
   const canSubmit = title.trim() !== "" && content.trim() !== "";
   const { editorBg, placeholder } = TAG_STYLES[tag];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!canSubmit) return;
     onSubmit({ title: title.trim(), content: content.trim(), tag });

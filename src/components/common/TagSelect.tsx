@@ -1,19 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import iconDropdownArrow from "../../assets/icons/dropdown-arrow.svg";
-import { TAGS, TAG_STYLES } from "../../constants/tag";
+import { TAGS, TAG_STYLES, type Tag } from "../../constants/tag";
 import TagChip from "./TagChip";
 
-export default function TagSelect({ value, onChange, includeAll = false }) {
+type TagSelectProps =
+  | { includeAll: true; value: Tag | null; onChange: (tag: Tag | null) => void }
+  | { includeAll?: false; value: Tag; onChange: (tag: Tag) => void };
+
+export default function TagSelect(props: TagSelectProps) {
+  const { value } = props;
   const [open, setOpen] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
 
-    const handleMouseDown = (e) => {
-      if (!containerRef.current.contains(e.target)) setOpen(false);
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) setOpen(false);
     };
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
 
@@ -25,8 +30,12 @@ export default function TagSelect({ value, onChange, includeAll = false }) {
     };
   }, [open]);
 
-  const selectTag = (tag) => {
-    onChange(tag);
+  const selectTag = (tag: Tag | null) => {
+    if (tag === null) {
+      if (props.includeAll) props.onChange(null);
+    } else {
+      props.onChange(tag);
+    }
     setOpen(false);
   };
 
@@ -58,7 +67,7 @@ export default function TagSelect({ value, onChange, includeAll = false }) {
           role="listbox"
           className="absolute top-[calc(100%+8px)] left-0 z-20 w-[150px] rounded-2xl bg-white-00 p-2 shadow-[0_12px_32px_rgba(0,27,81,0.18)]"
         >
-          {includeAll && (
+          {props.includeAll && (
             <li>
               <button
                 type="button"

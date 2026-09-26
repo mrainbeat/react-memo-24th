@@ -1,4 +1,11 @@
-export default function IconButton({ icon, label, onClick, className = "size-8" }) {
+interface IconButtonProps {
+  icon: string;
+  label: string;
+  onClick?: () => void;
+  className?: string;
+}
+
+export default function IconButton({ icon, label, onClick, className = "size-8" }: IconButtonProps) {
   return (
     <button
       type="button"

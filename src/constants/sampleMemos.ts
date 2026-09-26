@@ -1,4 +1,6 @@
-export const SAMPLE_MEMOS = [
+import type { Memo } from "../types/memo";
+
+export const SAMPLE_MEMOS: Memo[] = [
   {
     id: "sample-1",
     title: "이것은 제목입니다",

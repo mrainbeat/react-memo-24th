@@ -1,6 +1,6 @@
-import { TAG_STYLES } from "../../constants/tag";
+import { TAG_STYLES, type Tag } from "../../constants/tag";
 
-export default function TagChip({ tag }) {
+export default function TagChip({ tag }: { tag: Tag }) {
   const { dot, label, text } = TAG_STYLES[tag];
 
   return (
