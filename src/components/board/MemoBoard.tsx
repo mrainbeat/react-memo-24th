@@ -1,9 +1,17 @@
+import type { Memo } from "../../types/memo";
 import { partition, sortByNewest } from "../../utils/memo";
 import EmptyState from "./EmptyState";
 import MemoCard from "./MemoCard";
 import SearchEmpty from "./SearchEmpty";
 
-export default function MemoBoard({ memos, hasAnyMemo, onOpen, onTogglePin }) {
+interface MemoBoardProps {
+  memos: Memo[];
+  hasAnyMemo: boolean;
+  onOpen: (id: string) => void;
+  onTogglePin: (id: string) => void;
+}
+
+export default function MemoBoard({ memos, hasAnyMemo, onOpen, onTogglePin }: MemoBoardProps) {
   if (memos.length === 0) {
     return hasAnyMemo ? <SearchEmpty /> : <EmptyState />;
   }

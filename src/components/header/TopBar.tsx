@@ -1,10 +1,25 @@
 import iconAddMemoBtn from "../../assets/icons/button-add-memo.svg";
 import iconProfileBtn from "../../assets/icons/button-profile.svg";
+import type { Tag } from "../../constants/tag";
 import IconButton from "../common/IconButton";
 import TagSelect from "../common/TagSelect";
 import SearchInput from "./SearchInput";
 
-export default function TopBar({ keyword, onKeywordChange, activeTag, onTagChange, onAddClick }) {
+interface TopBarProps {
+  keyword: string;
+  onKeywordChange: (keyword: string) => void;
+  activeTag: Tag | null;
+  onTagChange: (tag: Tag | null) => void;
+  onAddClick: () => void;
+}
+
+export default function TopBar({
+  keyword,
+  onKeywordChange,
+  activeTag,
+  onTagChange,
+  onAddClick,
+}: TopBarProps) {
   return (
     <header className="mb-8 flex items-center gap-6">
       <div className="flex grow items-center gap-3 rounded-[28px] bg-white-00 p-4">
