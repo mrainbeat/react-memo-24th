@@ -75,7 +75,7 @@ export default function MemoPage() {
       />
 
       {selectedMemo && (
-        <Modal onClose={closeModal}>
+        <Modal label={selectedMemo.title} onClose={closeModal}>
           <MemoView
             memo={selectedMemo}
             onClose={closeModal}
